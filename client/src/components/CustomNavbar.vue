@@ -50,7 +50,6 @@ export default {
                   <ul class="nav">
                      <li><router-link to="/" class="active">Home</router-link></li>
                      <li><router-link to="/browse">Browse</router-link></li>
-                     <li><a href="details.html">Logout</a></li>
                      <li><router-link to="/profile">Profile <img src="../assets/images/profile-header.jpg" alt=""></router-link></li>
                   </ul>
                   <a class='menu-trigger'>

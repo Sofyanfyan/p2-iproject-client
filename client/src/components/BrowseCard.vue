@@ -1,16 +1,28 @@
 <script>
 
+import { useStore } from '../stores/game';
+import {mapActions} from 'pinia'
 
 export default{
+   
+   props:['data'],
 
-   props:['data']
+   methods: {
+      ...mapActions(useStore, ['gameId']),
+
+
+      gameIdLocal(id){
+
+         this.$router.push(`${id}`)
+      }
+   },
 }
 
 </script>
 
 
 <template>
-   <div class="col-lg-3 col-sm-6">
+   <div class="col-lg-3 col-sm-6 pointer" @click.prevent="gameIdLocal(data.id)">
       <div class="item">
          <div class="thumb">
             <img :src="data.thumbnail" alt="">
@@ -37,3 +49,13 @@ export default{
       </div>
    </div>
 </template>
+
+
+
+<style scoped>
+
+.pointer{
+   cursor: pointer;
+}
+
+</style>

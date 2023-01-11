@@ -77,9 +77,9 @@ export default {
                               <select name="sort" id="Sort" class="text-center form-select" placeholder="Sort"> 
                                  <option :value="this.$route.query.sort?  this.$route.query.sort : ''">{{ this.$route.query.sort?  this.$route.query.sort : 'Relevance' }}</option>
                                  <option v-if="this.$route.query.sort" value="">Relevance</option>
-                                 <option value="release-date">release-date</option>
-                                 <option value="popularity">popularity</option>
-                                 <option value="alphabetical">alphabetical</option>
+                                 <option v-if="this.$route.query.sort !== 'release-date'" value="release-date">release-date</option>
+                                 <option v-if="this.$route.query.sort !== 'popularity'" value="popularity">popularity</option>
+                                 <option v-if="this.$route.query.sort !== 'alphabetical'" value="alphabetical">alphabetical</option>
                               </select><br>
                            </div>
                            <div class="my-4 form-group" >
@@ -87,15 +87,15 @@ export default {
                               <select name="category" id="Sort" class="text-center form-select" placeholder="Sort"> 
                                  <option :value="this.$route.query.category?  this.$route.query.category : ''">{{ this.$route.query.category?  this.$route.query.category : 'All Genre'}}</option>
                                  <option v-if="this.$route.query.category" value="">All Genre</option>
-                                 <option value="action">action</option>
-                                 <option value="strategy">strategy</option>
-                                 <option value="racing">racing</option>
-                                 <option value="sports">sports</option>
-                                 <option value="mmorpg">mmorpg</option>
-                                 <option value="shooter">shooter</option>
-                                 <option value="moba">moba</option>
-                                 <option value="pvp">pvp</option>
-                                 <option value="horror">horror</option>
+                                 <option v-if="this.$route.query.category !== 'action'" value="action">action</option>
+                                 <option v-if="this.$route.query.category !== 'hahha'" value="strategy">strategy</option>
+                                 <option v-if="this.$route.query.category !== 'racing'" value="racing">racing</option>
+                                 <option v-if="this.$route.query.category !== 'sports'" value="sports">sports</option>
+                                 <option v-if="this.$route.query.category !== 'mmorpgc'" value="mmorpg">mmorpg</option>
+                                 <option v-if="this.$route.query.category !== 'shooter'" value="shooter">shooter</option>
+                                 <option v-if="this.$route.query.category !== 'moba'" value="moba">moba</option>
+                                 <option v-if="this.$route.query.category !== 'pvp'" value="pvp">pvp</option>
+                                 <option v-if="this.$route.query.category !== 'horror'" value="horror">horror</option>
                               </select><br>
                            </div>
                            <div class="my-4 form-group" >
@@ -103,8 +103,8 @@ export default {
                               <select name="platform" id="Sort" class="text-center form-select" placeholder="Sort"> 
                                  <option :value="this.$route.query.platform?  this.$route.query.platform : ''">{{ this.$route.query.platform?  this.$route.query.platform : 'All Platform' }}</option>
                                  <option v-if="this.$route.query.platform" value="">All Platform</option>
-                                 <option value="pc">PC (Windows)</option>
-                                 <option value="browser">Web Browser</option>
+                                 <option v-if="this.$route.query.platform !== 'pc'" value="pc">pc</option>
+                                 <option v-if="this.$route.query.platform !== 'browser'" value="browser">browser</option>
                               </select><br>
                            </div>
                            <button type="submit" class="btn btn-primary">Submit</button>

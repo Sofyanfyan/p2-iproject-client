@@ -7,7 +7,7 @@ import router from './router'
 // import './assets/main.css'
 import './assets/css/templatemo-cyborg-gaming.css'
 import './assets/css/fontawesome.css'
-import './assets/css/flex-slider.css'
+import './assets/css/flex-slider.css'     
 import './assets/css/animate.css'
 
 const pinia = createPinia()

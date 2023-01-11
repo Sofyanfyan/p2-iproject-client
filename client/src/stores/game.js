@@ -7,7 +7,12 @@ export const useStore = defineStore('counter', {
    state: () => ({ 
       popular: [],
       game: [],
+      detail:{},
+      gameLibrary:[],
       search: '',
+      username: localStorage.username? localStorage.username : '',
+      joined: localStorage.createdAt? localStorage.createdAt : '',
+      isSubs: localStorage.isSubs == true? true : false,
    }),
    getters: {
      doubleCount: (state) => state.count * 2,
@@ -41,6 +46,9 @@ export const useStore = defineStore('counter', {
             })
 
             localStorage.setItem('access_token', data.access_token)
+            localStorage.setItem('username', data.username)
+            localStorage.setItem('isSubs', data.isSubs)
+            localStorage.setItem('createdAt', data.createdAt)
             this.router.push('/')
          } catch (error) {
             console.log(error);
@@ -89,7 +97,7 @@ export const useStore = defineStore('counter', {
          }
       },
       
-      async fetchGame(category, sort, platform, search){
+      async fetchGame(category, sort, platform){
 
 
          let url = baseUrl + '/games'
@@ -127,11 +135,6 @@ export const useStore = defineStore('counter', {
             url = baseUrl + `/games?sort=${sort}&category=${category}&platform=${platform}`
          }
 
-         console.log(sort, '<<<<SORT');
-         console.log(category, '<<<<<< GENRE');
-         console.log(platform, "<<<<<<<< PLATFORM");
-         console.log(search, "<<<<<<<< SEARCH");
-
          try {
             
             const {data} = await axios({
@@ -142,24 +145,142 @@ export const useStore = defineStore('counter', {
                   access_token : localStorage.access_token
                }
             })
-
-            if(search){
-               const filter = data.filter(el => {
-                  search.includes(el.title)
-               })
-               
-               this.game = filter
-               console.log(filter, "<<<<FILTER");
-            }else {
-               
+   
                this.game = data
-               console.log(data);
-            }
+            
 
          } catch (error) {
             console.log(error);
          }
       },
 
+
+      async gameId(id){
+
+         try {
+            
+            const {data} = await axios({
+               url: baseUrl + `/games/${id}`,
+               method: 'GET',
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            this.detail = data;
+            this.router.push(`/${id}`)
+            console.log(data);
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+      async favGame(){
+
+         try {
+            
+            const {data} = await axios({
+               url: baseUrl + '/games/favorites',
+               method: 'GET',
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            this.gameLibrary = data;
+
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+
+      async updateStatus(id){
+
+         try {
+            
+            await axios({
+               url: baseUrl + `/games/favorites/${id}`,
+               method: 'PATCH',
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            this.router.push('/profile')
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+      async addFavorite(id){
+
+         try {
+            
+            await axios({
+               url: baseUrl + `/games/favorites/${id}`,
+               method: 'POST',
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            this.router.push('/profile')
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+      async subscribe(){
+
+         console.log('HIT SUBSCRIBE');
+
+         try {
+            await axios({
+               url: baseUrl + '/games/subs',
+               method: "PATCH",
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            localStorage.setItem('isSubs', true)
+            this.isSubs = true
+            this.router.push('/profile')
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+      async payMidtrans(){
+
+         try {
+            
+            const {data} = await axios({
+               url: baseUrl + '/games/generate-mitrans-token',
+               method: 'POST',
+               headers: {
+                  access_token: localStorage.access_token
+               }
+            })
+
+            const cb = this.subscribe
+
+            window.snap.pay(data.token, {
+               onSuccess: function(){
+                 /* You may add your own implementation here */
+                  console.log('Yuk boss paymentnya');
+                  cb()
+               }
+            })
+         } catch (error) {
+            console.log(error);
+         }
+      },
+
+
+      
    },
+
+   
 })
