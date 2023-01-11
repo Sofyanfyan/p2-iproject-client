@@ -47,10 +47,12 @@ export default {
                            </div>
                            <div class="col-lg-4 align-self-center">
                               <div class="main-info header-text">
-                                 <span>Not Member</span>
+                                 <span v-if="isSubs == 'false'">Not Member</span>
+                                 <span v-if="isSubs == 'true'">Member</span>
                                  <h4 class="ms-1">{{ username }}</h4>
-                                 <p>You Haven't Subscribe yet. Go Subs By Touching The Button Below.</p>
-                                 <div class="main-border-button">
+                                 <p v-if="isSubs == 'false'">You Haven't Subscribe yet. Go Subs By Touching The Button Below.</p>
+                                 <p v-if="isSubs == 'true'">Thankyou for supporting us!.</p>
+                                 <div class="main-border-button" v-if="isSubs == 'false'">
                                     <router-link to="/payment">Subscribe</router-link>
                                  </div>
                               </div>

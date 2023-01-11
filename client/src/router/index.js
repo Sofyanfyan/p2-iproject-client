@@ -56,4 +56,20 @@ const router = createRouter({
    ]
 })
 
+router.beforeEach((to, from, next) => {
+   // to and from are both route objects. must call `next`.
+   const isLogin = localStorage.access_token
+   const isSubs = localStorage.isSubs
+
+   if(!isLogin && to.name == 'register'){
+      next()
+   } else if (!isLogin && to.name !== 'login'){
+      next('/login')
+   } else if (isSubs == 'true' && to.name == 'payment'){
+      next('/profile')
+   } else {
+      next()
+   }
+})
+
 export default router

@@ -21,7 +21,7 @@ export default{
 
    computed: {
 
-      ...mapWritableState(useStore, ['detail'])
+      ...mapWritableState(useStore, ['detail', 'isSubs'])
    },
 
    created(){
@@ -106,7 +106,7 @@ export default{
                               <div class="col-lg-12">
                                  <p>{{ detail.description }}</p>
                               </div>
-                              <div class="col-lg-12">
+                              <div class="col-lg-12" v-if="isSubs == 'true'">
                                  <div class="main-border-button">
                                     <a :href="detail.game_url">Download Now!</a>
                                  </div>
@@ -117,6 +117,52 @@ export default{
                   </div>
                </div>
                <!-- ***** Details End ***** -->
+
+
+               <div class="start-stream" v-if="isSubs == 'false'">
+               <div class="col-lg-12">
+                  <div class="heading-section">
+                     <h4><em>How To Download</em>This Game?</h4>
+                  </div>
+                  <div class="row">
+                     <div class="col-lg-4">
+                        <div class="item">
+                           <div class="icon">
+                              <img src="../assets/images/service-01.jpg" alt=""
+                                 style="max-width: 60px; border-radius: 50%;">
+                           </div>
+                           <h4>Go To Your Profile</h4>
+                           <p> <b>Step 1 : </b> Check your profile!, make sure you have subscribed to cyborg games, to get access to the download link.</p>
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="item">
+                           <div class="icon">
+                              <img src="../assets/images/service-02.jpg" alt=""
+                                 style="max-width: 60px; border-radius: 50%;">
+                           </div>
+                           <h4>Live Stream Button</h4>
+                           <p> <b>Step 2 : </b>If you haven't subscribed yet, press the subscribe button available on your profile.</p>
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        <div class="item">
+                           <div class="icon">
+                              <img src="../assets/images/service-03.jpg" alt=""
+                                 style="max-width: 60px; border-radius: 50%;">
+                           </div>
+                           <h4>You Are Live</h4>
+                           <p> <b>Step 3 : </b>After that you will be directed to the payment page, and then you can enjoy all the games here.</p>
+                        </div>
+                     </div>
+                     <div class="col-lg-12">
+                        <div class="main-button">
+                           <router-link to="/profile">Go To Profile</router-link>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
 
             </div>
          </div>

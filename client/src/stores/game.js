@@ -10,9 +10,9 @@ export const useStore = defineStore('counter', {
       detail:{},
       gameLibrary:[],
       search: '',
-      username: localStorage.username? localStorage.username : '',
-      joined: localStorage.createdAt? localStorage.createdAt : '',
-      isSubs: localStorage.isSubs == true? true : false,
+      username: '',
+      joined: '',
+      isSubs: false,
    }),
    getters: {
      doubleCount: (state) => state.count * 2,
@@ -168,6 +168,7 @@ export const useStore = defineStore('counter', {
             })
 
             this.detail = data;
+            this.isSubs = localStorage.isSubs
             this.router.push(`/${id}`)
             console.log(data);
          } catch (error) {
@@ -188,6 +189,10 @@ export const useStore = defineStore('counter', {
             })
 
             this.gameLibrary = data;
+            this.username = localStorage.username
+            this.isSubs = localStorage.isSubs
+            this.joined = localStorage.createdAt
+
 
          } catch (error) {
             console.log(error);
