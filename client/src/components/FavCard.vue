@@ -24,14 +24,10 @@ export default{
          }).then((result) => {
             if (result.isConfirmed) {
                this.updateStatus(this.data.id)
-               this.$router.go()
-               Swal.fire({
-                  position: 'top-end',
-                  icon: 'success',
-                  title: 'Status Completed',
-                  showConfirmButton: false,
-                  timer: 1500
-               })
+               setTimeout(() => {
+                  this.$router.go()
+               }, 1000);
+               
             }
          })
       }

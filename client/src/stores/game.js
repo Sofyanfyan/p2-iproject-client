@@ -2,7 +2,8 @@ import { defineStore } from 'pinia'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 
-const baseUrl = 'http://localhost:3000'
+// const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://cyborg-production-production.up.railway.app'
 
 export const useStore = defineStore('counter', {
    state: () => ({ 
