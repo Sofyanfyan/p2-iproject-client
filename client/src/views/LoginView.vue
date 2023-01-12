@@ -9,7 +9,8 @@ export default {
    data(){
       return{
          email: '',
-         password: ''
+         password: '',
+         isLoad: true,
       }
    },
 
@@ -31,6 +32,12 @@ export default {
 
    created(){
       this.isLogin = false
+   },
+
+   mounted(){
+      setTimeout(() => {
+         this.isLoad = false
+      }, 500);
    }
 
 }
@@ -39,6 +46,17 @@ export default {
 
 
 <template>
+
+<div id="js-preloader" class="js-preloader" v-if="isLoad">
+      <div class="preloader-inner">
+         <span class="dot"></span>
+         <div class="dots">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+</div>
 
    <div class="container">
       <div class="row">

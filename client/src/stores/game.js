@@ -327,13 +327,6 @@ export const useStore = defineStore('counter', {
                }
             })
 
-            Swal.fire({
-               position: 'top-end',
-               icon: 'success',
-               title: 'Success added to game library',
-               showConfirmButton: false,
-               timer: 1500
-            })
 
             this.router.push('/profile')
          } catch (error) {
@@ -371,13 +364,6 @@ export const useStore = defineStore('counter', {
 
             localStorage.setItem('isSubs', true)
             this.isSubs = true
-            Swal.fire({
-               position: 'top-end',
-               icon: 'success',
-               title: 'Payment Success',
-               showConfirmButton: false,
-               timer: 1000
-            })
             this.router.push('/profile')
          } catch (error) {
             if(error.response.data.message === 'Invalid token'){

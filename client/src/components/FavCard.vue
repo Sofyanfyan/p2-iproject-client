@@ -15,12 +15,12 @@ export default{
 
          Swal.fire({
             title: 'Are you sure?',
-            text: "You will be logged out of this website!",
+            text: "This action will change your status to completed!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#e75e8d',
             cancelButtonColor: '#000000',
-            confirmButtonText: 'Yes, Logout!'
+            confirmButtonText: 'Yes, Complete?'
          }).then((result) => {
             if (result.isConfirmed) {
                this.updateStatus(this.data.id)

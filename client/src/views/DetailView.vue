@@ -2,15 +2,18 @@
 
 import { useStore } from '../stores/game';
 import { mapWritableState, mapActions } from 'pinia';
-
 import Card from '../components/DetailCard.vue'
-import NotFound from './NotFound.vue'
 
 export default{
 
+   data(){
+      return{
+         isLoad: true
+      }
+   },
+
    components:{
       Card,
-      NotFound,
    },
 
    methods: {
@@ -29,6 +32,13 @@ export default{
    created(){
       
       this.gameId(this.$route.params.gameId)
+
+      
+   },
+   mounted(){
+      setTimeout(() => {
+         this.isLoad = false
+      }, 1500);
    }
 }  
 
@@ -37,10 +47,18 @@ export default{
 
 <template>
 
-   <NotFound v-if="!detail"/>
+<div id="js-preloader" class="js-preloader" v-if="isLoad">
+      <div class="preloader-inner">
+         <span class="dot"></span>
+         <div class="dots">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+</div>
 
-
-   <div class="container" v-if="detail">
+   <div class="container">
       <div class="row">
          <div class="col-lg-12">
             <div class="page-content">

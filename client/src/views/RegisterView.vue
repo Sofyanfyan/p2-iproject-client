@@ -11,7 +11,8 @@ data(){
    return{
       username: '',
       email: '',
-      password: ''
+      password: '',
+      isLoad: true,
    }
 },
 
@@ -27,7 +28,13 @@ methods: {
 
       this.register(value)
    }
-}
+},
+
+mounted(){
+      setTimeout(() => {
+         this.isLoad = false
+      }, 300);
+   }
 
 }
 
@@ -35,7 +42,21 @@ methods: {
 </script>
 
 
+
 <template>
+
+<div id="js-preloader" class="js-preloader" v-if="isLoad">
+      <div class="preloader-inner">
+         <span class="dot"></span>
+         <div class="dots">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+</div>
+
+
    <div class="container">
       <div class="row">
          <div class="col-lg-12">

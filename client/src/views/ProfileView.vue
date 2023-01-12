@@ -8,6 +8,12 @@ import Card from '../components/FavCard.vue'
 
 export default {
 
+   data(){
+      return{
+         isLoad:true
+      }
+   },
+
    components:{
       Card,
    },
@@ -40,6 +46,11 @@ export default {
    created(){
 
       this.favGame()
+   },
+   mounted(){
+      setTimeout(() => {
+         this.isLoad = false
+      }, 400);
    }
 }
 
@@ -47,6 +58,18 @@ export default {
 </script>
 
 <template>
+
+<div id="js-preloader" class="js-preloader" v-if="isLoad">
+      <div class="preloader-inner">
+         <span class="dot"></span>
+         <div class="dots">
+         <span></span>
+         <span></span>
+         <span></span>
+      </div>
+   </div>
+</div>
+
    <div class="container">
       <div class="row">
          <div class="col-lg-12">
