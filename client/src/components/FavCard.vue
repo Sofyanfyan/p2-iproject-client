@@ -1,8 +1,9 @@
 <script>
 
+import Swal from 'sweetalert2'
+
 import { useStore } from '../stores/game';
 import {mapActions} from 'pinia';
-
 
 export default{
 
@@ -11,8 +12,28 @@ export default{
    methods:{
       ...mapActions(useStore, ['updateStatus']),
       updateLocal(){
-         this.updateStatus(this.data.id)
-         this.$router.go()
+
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of this website!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e75e8d',
+            cancelButtonColor: '#000000',
+            confirmButtonText: 'Yes, Logout!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+               this.updateStatus(this.data.id)
+               this.$router.go()
+               Swal.fire({
+                  position: 'top-end',
+                  icon: 'success',
+                  title: 'Status Completed',
+                  showConfirmButton: false,
+                  timer: 1500
+               })
+            }
+         })
       }
    }
 }

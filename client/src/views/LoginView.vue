@@ -2,7 +2,7 @@
 
 import {useStore} from '../stores/game.js'
 
-import { mapActions } from 'pinia'
+import { mapActions, mapWritableState } from 'pinia'
 
 export default {
 
@@ -24,6 +24,13 @@ export default {
 
          this.login(value)
       }
+   },
+   computed:{
+      ...mapWritableState(useStore, ['isLogin', 'callback'])
+   },
+
+   created(){
+      this.isLogin = false
    }
 
 }
@@ -71,6 +78,7 @@ export default {
                                              </div>
                                           
                                              <!-- <GoogleLogin :callback="callback"/> -->
+                                             
 
                                              <div class="pt-1 mb-4 mt-3">
                                                 <button class="btn btn-dark btn-lg btn-block" type="submit" style="background-color:#e75e8d">Login</button>
@@ -78,9 +86,19 @@ export default {
 
                                           </form>
 
+                                          
+                                          <div class="text-center">
                                        
-                                          <p class="mb-5 pb-lg-2" style="color: white;">Don't have an account? 
+                                          <p class="mt-5 pb-lg-2 text-center" style="color: white;">Don't have an account? 
                                              <router-link to="/register" style="color: #e75e8d;">Register here</router-link></p>
+
+
+                                             <p class="pb-lg-2 text-center mb-3" style="color: white;">or</p>
+                                             
+
+                                             <GoogleLogin :callback="callback"/>
+
+                                          </div>
                                           
                                        </div>
                                     </div>

@@ -7,6 +7,7 @@ import BrowseView from '../views/BrowseView.vue'
 import DetailView from '../views/DetailView.vue'
 import ProfileView from '../views/ProfileView.vue'
 import PaymentView from '../views/PaymentView.vue'
+import NotFound from '../views/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -46,13 +47,11 @@ const router = createRouter({
          path: '/:gameId',
          component: DetailView
       },
-      
-      
-      // { 
-      //    name: 'NotFound', 
-      //    path: '/:pathMatch(.*)*', 
-      //    component: NotFound 
-      // },
+      { 
+         name: 'NotFound', 
+         path: '/:pathMatch(.*)*', 
+         component: NotFound 
+      },
    ]
 })
 
@@ -67,6 +66,8 @@ router.beforeEach((to, from, next) => {
       next('/login')
    } else if (isSubs == 'true' && to.name == 'payment'){
       next('/profile')
+   } else if (isLogin && to.name == 'login' || isLogin && to.name == 'register') {
+      next('/')
    } else {
       next()
    }

@@ -6,7 +6,14 @@ import { mapWritableState } from 'pinia';
 export default {
    
    computed:{
-      ...mapWritableState(useStore, ['search'])
+      ...mapWritableState(useStore, ['search', 'isLogin'])
+   },
+
+   created(){
+      if(localStorage.access_token){
+
+         this.isLogin = true
+      }
    }
 }
 
@@ -38,8 +45,8 @@ export default {
                   </div>
                   <!-- ***** Logo End ***** -->
                   <!-- ***** Search End ***** -->
-                  <div class="search-input">
-                     <form id="search" action="#">
+                  <div>
+                     <form id="search" action="#" v-if="isLogin">
                         <input type="text" placeholder="Type Something" id='searchText' v-model="search"
                            onkeypress="handle" />
                         <i class="fa fa-search"></i>
@@ -47,8 +54,8 @@ export default {
                   </div>
                   <!-- ***** Search End ***** -->
                   <!-- ***** Menu Start ***** -->
-                  <ul class="nav">
-                     <li><router-link to="/" class="active">Home</router-link></li>
+                  <ul class="nav" v-if="isLogin">
+                     <li><router-link to="/">Home</router-link></li>
                      <li><router-link to="/browse">Browse</router-link></li>
                      <li><router-link to="/profile">Profile <img src="../assets/images/profile-header.jpg" alt=""></router-link></li>
                   </ul>

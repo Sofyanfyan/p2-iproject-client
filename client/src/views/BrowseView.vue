@@ -43,23 +43,23 @@ export default {
                   <div class="col-lg-8">
                      <div class="featured-games header-text">
                         <div class="heading-section">
-                           <h4><em>Featured</em> Games</h4>
+                           <h4><em>About</em></h4>
                         </div>
                         <h6>
-                           Welcome to Cyborg Games, where we're dedicated to bringing you the best in online gaming experiences. We're a small but talented team of developers and 
-                           designers who are passionate about creating fun and engaging games that are accessible to players of all ages and skill levels <br><br>
+                           Welcome to <span>Cyborg</span>, where I am dedicated to bringing you the best in online gaming experiences. I am developers and designers who are passionate about 
+                           creating fun and engaging games that are accessible to players of all ages and skill levels. <br><br>
 
-                           Our mission is to create games that are not only entertaining, but also thought-provoking and challenging. We believe that games can be more 
-                           than just a way to pass the time, they can be a powerful tool for learning and personal growth. That's why we strive to create games that are 
-                           not only fun to play, but also educational and thought-provoking. <br><br>
+                           My mission is to create games that are <span>not only entertaining</span>, but also thought-provoking and challenging. I believe that games can be more than 
+                           just a way to pass the time, they can be a 
+                           powerful tool for learning and personal growth. That's why I strive to create games that are not only fun to play, but also <span>educational</span> and thought-provoking. <br><br>
 
-                           We're always looking to improve our games and make them as fun and enjoyable as possible, so if you have any feedback, suggestions, or just want to say hi, 
-                           please feel free to contact us through the contact section in the website. We also have active community section where you can interact with other players, 
-                           share your experiences and get help. <br><br>
+                           I am always looking to improve my games and make them as <span>fun and enjoyable</span> as possible, so if you have any feedback, suggestions, or just want to say hi, 
+                           please feel free to contact me through email <i><span>cyborggames@outlook.co.id</span></i>. 
+                           I also have an active community section where you can interact with other players, share your experiences, and get help. <br><br>
 
-                           We're also committed to social responsibility and using our platform for good, as such we have dedicated few games for social causes like helping children learn in an interactive way, and spreading awareness about various social issues like mental health, environment etc.
-
-                           Thank you for choosing Cyborg Games. We hope you enjoy your time with us! <br><br>
+                           I am also committed to social responsibility and using my platform for good, as such I have dedicated a few games for social causes like helping children learn in 
+                           an interactive way, 
+                           and spreading awareness about various social issues like mental health, environment, etc. <span>Thank you</span> for choosing Cyborg Games. I hope you enjoy your time with me! <br><br>
                      
                         </h6>
                      </div>
@@ -67,7 +67,7 @@ export default {
                   <div class="col-lg-4">
                      <div class="top-downloaded">
                         <div class="heading-section">
-                           <h4 class="text-center"><em>Filter</em> Cyborg</h4>
+                           <h4 class="text-center"><em>Games</em> Filter</h4>
                         </div>
 
                         <form>
@@ -123,7 +123,7 @@ export default {
                <div class="live-stream">
                   <div class="col-lg-12">
                      <div class="heading-section">
-                        <h4><em>Most Popular</em> Right Now</h4>
+                        <h4><em>Games</em> List</h4>
                      </div>
                   </div>
                   <div class="row">
@@ -139,3 +139,13 @@ export default {
       </div>
       </div>
 </template>
+
+
+
+<style scoped>
+
+span{
+   color: #e75e8d
+}
+
+</style>

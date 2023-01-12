@@ -4,11 +4,13 @@ import { useStore } from '../stores/game';
 import { mapWritableState, mapActions } from 'pinia';
 
 import Card from '../components/DetailCard.vue'
+import NotFound from './NotFound.vue'
 
 export default{
 
    components:{
       Card,
+      NotFound,
    },
 
    methods: {
@@ -34,7 +36,11 @@ export default{
 
 
 <template>
-   <div class="container">
+
+   <NotFound v-if="!detail"/>
+
+
+   <div class="container" v-if="detail">
       <div class="row">
          <div class="col-lg-12">
             <div class="page-content">
@@ -141,7 +147,7 @@ export default{
                               <img src="../assets/images/service-02.jpg" alt=""
                                  style="max-width: 60px; border-radius: 50%;">
                            </div>
-                           <h4>Live Stream Button</h4>
+                           <h4>Click Subscribe</h4>
                            <p> <b>Step 2 : </b>If you haven't subscribed yet, press the subscribe button available on your profile.</p>
                         </div>
                      </div>
@@ -151,7 +157,7 @@ export default{
                               <img src="../assets/images/service-03.jpg" alt=""
                                  style="max-width: 60px; border-radius: 50%;">
                            </div>
-                           <h4>You Are Live</h4>
+                           <h4>Enjoy The Game!</h4>
                            <p> <b>Step 3 : </b>After that you will be directed to the payment page, and then you can enjoy all the games here.</p>
                         </div>
                      </div>

@@ -1,5 +1,6 @@
 <script>
 
+import Swal from 'sweetalert2'
 import {mapActions, mapWritableState} from 'pinia'
 import { useStore } from '../stores/game';
 
@@ -15,12 +16,26 @@ export default {
       ...mapActions(useStore, ['favGame']),
       logout(){
 
-         localStorage.clear()
-         this.$router.push('/login')
+         Swal.fire({
+            title: 'Are you sure?',
+            text: "You will be logged out of this website!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#e75e8d',
+            cancelButtonColor: '#000000',
+            confirmButtonText: 'Yes, Logout!'
+         }).then((result) => {
+            if (result.isConfirmed) {
+               localStorage.clear()
+               this.$router.push('/login')
+            }
+         })
+
+         
       }
    }, 
    computed: {
-      ...mapWritableState(useStore, ['gameLibrary', 'username', 'joined', 'isSubs'])
+      ...mapWritableState(useStore, ['gameLibrary', 'username', 'joined', 'isSubs', 'page'])
    },
    created(){
 

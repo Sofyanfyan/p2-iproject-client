@@ -1,5 +1,6 @@
 import { createApp, markRaw  } from 'vue'
 import { createPinia } from 'pinia'
+import vue3GoogleLogin from 'vue3-google-login'
 
 import App from './App.vue'
 import router from './router'
@@ -17,6 +18,10 @@ pinia.use(({ store }) => {
 })
 
 const app = createApp(App)
+
+app.use(vue3GoogleLogin, {
+   clientId: '228353650776-osa4mpq26lr0b8lk06cc412mn388st4c.apps.googleusercontent.com'
+})
 
 app.use(pinia)
 app.use(router)

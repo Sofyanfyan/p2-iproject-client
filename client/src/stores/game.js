@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const baseUrl = 'http://localhost:3000'
 
@@ -13,6 +14,8 @@ export const useStore = defineStore('counter', {
       username: '',
       joined: '',
       isSubs: false,
+      isLogin: false,
+      page: 'home'
    }),
    getters: {
      doubleCount: (state) => state.count * 2,
@@ -49,9 +52,14 @@ export const useStore = defineStore('counter', {
             localStorage.setItem('username', data.username)
             localStorage.setItem('isSubs', data.isSubs)
             localStorage.setItem('createdAt', data.createdAt)
+            this.isLogin = true
             this.router.push('/')
          } catch (error) {
-            console.log(error);
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: error.response.data.message,
+            })
          }
       },
 
@@ -72,7 +80,11 @@ export const useStore = defineStore('counter', {
 
             this.router.push('/login')
          } catch (error) {
-            console.log(error);
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: error.response.data.message,
+            })
          }
       },
 
@@ -91,9 +103,25 @@ export const useStore = defineStore('counter', {
 
             const cut = data.slice(0, 12);
             this.popular = cut
+            this.page = 'home'
          } catch (error) {
             
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
       
@@ -147,10 +175,25 @@ export const useStore = defineStore('counter', {
             })
    
                this.game = data
-            
+               this.page = 'browse'
 
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -169,10 +212,34 @@ export const useStore = defineStore('counter', {
 
             this.detail = data;
             this.isSubs = localStorage.isSubs
+            this.page = 'detail'
             this.router.push(`/${id}`)
-            console.log(data);
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else if (error.response.data.message === 'Game not found'){
+
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+               this.router.push('/browse')
+            }
+            else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -192,10 +259,25 @@ export const useStore = defineStore('counter', {
             this.username = localStorage.username
             this.isSubs = localStorage.isSubs
             this.joined = localStorage.createdAt
-
+            this.page = 'profile'
 
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -214,7 +296,22 @@ export const useStore = defineStore('counter', {
 
             this.router.push('/profile')
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -230,9 +327,32 @@ export const useStore = defineStore('counter', {
                }
             })
 
+            Swal.fire({
+               position: 'top-end',
+               icon: 'success',
+               title: 'Success added to game library',
+               showConfirmButton: false,
+               timer: 1500
+            })
+
             this.router.push('/profile')
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -251,9 +371,31 @@ export const useStore = defineStore('counter', {
 
             localStorage.setItem('isSubs', true)
             this.isSubs = true
+            Swal.fire({
+               position: 'top-end',
+               icon: 'success',
+               title: 'Payment Success',
+               showConfirmButton: false,
+               timer: 1000
+            })
             this.router.push('/profile')
          } catch (error) {
-            console.log(error);
+            if(error.response.data.message === 'Invalid token'){
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+
+               localStorage.clear()
+               this.router.push('/login')
+            } else {
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+               })
+            }
          }
       },
 
@@ -279,12 +421,43 @@ export const useStore = defineStore('counter', {
                }
             })
          } catch (error) {
-            console.log(error);
+               Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: error.response.data.message,
+            }) 
          }
       },
 
 
-      
+      callback(response){
+         
+         axios({
+
+            url: baseUrl + '/google-login',
+            method:'POST', 
+            headers: {
+               access_token: response.credential
+            }
+         }).then(result=> {
+            const { data } = result
+            localStorage.setItem('access_token', data.access_token)
+            localStorage.setItem('username', data.username)
+            localStorage.setItem('isSubs', data.isSubs)
+            localStorage.setItem('createdAt', data.createdAt)
+            
+
+            this.router.push('/')
+            this.isLogin = true
+
+         }).catch(err => {
+            Swal.fire({
+               icon: 'error',
+               title: 'Oops...',
+               text: err.response,
+         }) 
+         })
+      }
    },
 
    
